@@ -1,19 +1,23 @@
 package org.tech.world.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "country_language")
-public class CountryLanguage {
+public class CountryLanguage implements Serializable {
     @Id
-    @Column(name = "country_code")
+    @Column(name = "country_code", length = 3)
+    @NotNull
     private String countryCode;
+    @Id
     @Column(columnDefinition = "TEXT")
+    @NotNull
     private String language;
+    @Basic
     @Column(name = "is_official")
+    @NotNull
     private boolean isOfficial;
     
     public String getCountryCode() {

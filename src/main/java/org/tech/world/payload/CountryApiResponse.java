@@ -1,8 +1,8 @@
 package org.tech.world.payload;
 
-import org.tech.world.domain.Country;
+import java.io.Serializable;
 
-public class CountryApiResponse {
+public class CountryApiResponse implements Serializable {
     
     private String name;
     private String continent;

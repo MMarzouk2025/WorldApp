@@ -2,10 +2,12 @@ package org.tech.world.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "country")
-public class Country {
+public class Country implements Serializable {
     @Id
     @Column(name = "code")
     private String countryCode;
@@ -20,8 +22,9 @@ public class Country {
     private int population;
     @Column(name = "life_expectancy")
     private float lifeExpectancy;
-    @OneToOne(mappedBy = "country_code")
-    private CountryLanguage countryLanguage;
+    @OneToMany
+    @JoinColumn(name = "country_code", referencedColumnName = "code")
+    private Set<CountryLanguage> countryLanguages;
     
     public String getCountryCode() {
         return countryCode;
@@ -63,12 +66,13 @@ public class Country {
         this.lifeExpectancy = lifeExpectancy;
     }
     
-    public CountryLanguage getCountryLanguage() {
-        return countryLanguage;
+    public Set<CountryLanguage> getCountryLanguages() {
+        return countryLanguages;
     }
     
-    public void setCountryLanguage(CountryLanguage countryLanguage) {
-        this.countryLanguage = countryLanguage;
+    public void setCountryLanguages(Set<CountryLanguage> countryLanguages) {
+        this.countryLanguages = countryLanguages;
     }
+    
 }
 
