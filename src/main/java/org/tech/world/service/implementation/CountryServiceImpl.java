@@ -13,6 +13,7 @@ import org.tech.world.repository.CountryDAO;
 import org.tech.world.service.CountryService;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -26,11 +27,15 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public ResponseEntity<?> getCountryInformation(String countryCode) {
         Country country = getCountryByCode(countryCode);
-        Optional<String> countryLanguageOptional = country.getCountryLanguages().stream()
-                .filter(CountryLanguage::isOfficial)
-                .map(CountryLanguage::getLanguage)
-                .findFirst();
-        String language = countryLanguageOptional.orElse("");
+        Set<CountryLanguage> countryLanguages = country.getCountryLanguages();
+        String language = "";
+        if (countryLanguages != null) {
+            Optional<String> countryLanguageOptional = countryLanguages.stream()
+                    .filter(CountryLanguage::isOfficial)
+                    .map(CountryLanguage::getLanguage)
+                    .findFirst();
+            language = countryLanguageOptional.orElse("");
+        }
         CountryApiResponse response = CountryResponseMapper.fromCountryToCountryResponse(country, language);
         return ResponseEntity.ok(response);
     }
