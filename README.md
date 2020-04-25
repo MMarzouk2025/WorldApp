@@ -8,10 +8,10 @@ World Data Application is an open source application to access world statics for
 #### Docker installed
 
 ## Technologies
-#### JDK 8
-#### Spring Boot (and other lower level Spring modules)
-#### Docker
-#### Junit5 and Mockito
+#### - JDK 8
+#### - Spring Boot (and other lower level Spring modules)
+#### - Docker
+#### - Junit5 and Mockito
 
 ## Installation
 #### first: deploy the following database image 
@@ -21,7 +21,7 @@ mvn spring-boot:run
 
 ## Example: [World App API]
 
-localhost:8080/BHR
+localhost:9292/BHR
 #### result =>
 {
     "name": "Bahrain",
